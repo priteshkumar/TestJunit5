@@ -1,7 +1,10 @@
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,8 +19,16 @@ public class DateValidatorTest {
   protected static final int MIN_YEAR = 1901;
   protected static final int MAX_YEAR = 2022;
   protected static final int FEB = 2;
+  private static DateValidator dateValidator;
 
-  private DateValidator dateValidator = new DateValidator();
+  /**
+   * executes before all tests are run does initial setup e.g. create
+   * database connections
+   */
+  @BeforeAll
+  public static void setup() {
+    dateValidator = new DateValidator();
+  }
 
   @Test
   @Order(6)
@@ -147,5 +158,14 @@ public class DateValidatorTest {
         }
       }
     }
+  }
+
+  /**
+   * executes to do cleanup after all tests are run e.g. close database
+   * connections
+   */
+  @AfterAll
+  public static void cleanUp() {
+    System.out.println("closing all connections");
   }
 }
