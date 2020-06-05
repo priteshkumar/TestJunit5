@@ -1,4 +1,4 @@
-### Junit5 testcase info
+### Junit5 testclass info
 
 `Test class` : any top level class/static member class/@Nested class
 
@@ -21,4 +21,13 @@
 
 `@AfterEach` : does  cleanup after every test is run.
 
-`
+
+### Test Instance Lifecycle
+
+> For each test case a new testclass is instantiated to allow isolated execution
+
+> Above is default behavior in Junit Jupiter
+
+>To use same test class instance with all test cases , use below annotation on testclass
+
+`@TestInstance(Lifecycle.PER_CLASS)` : This ensures a single testclass instance for all testcases
