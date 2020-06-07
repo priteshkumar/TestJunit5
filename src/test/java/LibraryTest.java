@@ -8,6 +8,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 public class LibraryTest {
@@ -25,14 +26,16 @@ public class LibraryTest {
 
   @Test
   public void testAddBook(){
+    when(mockCatalog.exists(anyString())).thenReturn(false,true);
     when(mockCatalog.save(any(Book.class))).thenReturn(true);
     Book book = new Book("jenkins2");
     assertTrue(library.addBook(book),"add book failed");
-
+    assertFalse(library.addBook(book),"add book failed");
   }
 
   @Test
   public void testAddBookRandom(){
+
     Book book = new Book("Docker");
     when(mockCatalog.save(any(Book.class))).thenReturn(true,true,false);
     assertTrue(library.addBook(book),"add book passed");
